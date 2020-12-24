@@ -1,0 +1,1 @@
+Meu objetivo é fazer com que vc possa criar listas com da forma que quiser e quantas quiser, pretendo melhor e futuramente adicionar um banco de dados, mas no momento ainda não aprendi o suficiente para fazer o back-end, farei o máximo que conseguir apenas com front-end.
