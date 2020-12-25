@@ -127,10 +127,31 @@
     border:1px solid #AAA;
 }
 #section--2 label{
-    font-size:16px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    margin:20px 0px;
+}
+#section--2 label span{
+    margin-bottom:10px;
+    font-size:20px;
+    color:var(--white-text-color);
 }
 #section--2 input::placeholder{
     color:var(--black-text-color);
+}
+.button{
+    display:block;
+    height:35px;
+    width:150px;
+    margin:30px 0px;
+    border-radius:8px;
+    border:1px solid #000;
+    background:var(--blue-gradient-bgcolor);
+    color:var(--white-text-color);
+    outline:0;
+    cursor:pointer;
 }
 
 
@@ -157,35 +178,6 @@ h2{
     font-size:25px;
     font-weight: bold;
     text-decoration:underline;
-    color:#FFF;
-}
-.button{
-    padding:10px 15px;
-    margin:30px 0px;
-    border-radius:8px;
-    border:1px solid #000;
-    background:linear-gradient(to right, #191970, #000066);
-    color:#FFF;
-    outline:0;
-    cursor:pointer;
-    text-decoration:none;
-}
-.itemList{
-    width:200px;
-    height:30px;
-    padding-left:10px;
-    font-size:15px;
-    border-radius:20px;
-    outline:0;
-    background-color:#D0CEC9;
-    border:1px solid #AAA;
-}
-.itemList::placeholder{
-    color:#000;
-}
-li{
-    padding:5px;
-    font-size:16px;
     color:#FFF;
 }
 .moldes{
