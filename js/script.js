@@ -1,30 +1,67 @@
-const buttonAdditem = document.querySelector(".button");
-const itemList = document.querySelector(".itemList");
+// constantes
+const links = document.querySelectorAll(".link");
+const sectionLists = document.querySelector("#section--1");
+const sectionCreate = document.querySelector("#section--2");
+const buttonCreate = document.querySelector("#section--2 .button");
 
 
-itemList.addEventListener("keydown", (event) => {
-    if(event.key == "Enter"){
-        if(itemList.value != ""){
-            const lista = document.querySelector(".lista");
-            const itemArmazenado = `<li>${itemList.value}</li>`;
-            lista.innerHTML += itemArmazenado;
-            
+
+// variáveis
+let listsJson = [];
+let listCreator = {
+    creat:() => {
+        const inputTitle = document.querySelector("#section--2 input").value;
+        const textAreaItens = document.querySelector("#section--2 textarea").value;
+
+        if(inputTitle != "" && textAreaItens != ""){
+            const title = inputTitle;
+            const listItens = textAreaItens.split(",");
+
+            listsJson.push({title, listItens});
+            listCreator.clearIputs();
+            console.log(listsJson);
         }
         else{
-            alert("é necessário adicionar um ingrediente no campo!");
+            console.log("não funcionou")
         }
-        itemList.value = "";
+    },
+    clearIputs:() => {
+        let inputs = document.querySelectorAll("input");
+        let textareas = document.querySelectorAll("textarea");
+
+        for(let input of inputs){
+            input.value = ""
+        };
+        for(let textarea of textareas){
+            textarea.value = ""
+        };
+
     }
-});
-buttonAdditem.addEventListener("click", () => {
-    if(itemList.value != ""){
-        const lista = document.querySelector(".lista");
-        const itemArmazenado = `<li>${itemList.value}</li>`;
-        lista.innerHTML += itemArmazenado;
-        
-    }
-    else{
-        alert("é necessário adicionar um item da lista no campo!");
-    }
-    itemList.value = "";
-});
+};
+
+
+buttonCreate.addEventListener("click", listCreator.creat);
+
+
+// dando função aos links
+for(let link of links){
+    link.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        switch(link.getAttribute("data-link")){
+            case "lists":
+                clearClasses();   
+                sectionLists.classList.remove("none");
+                break;
+            case "create":
+                clearClasses();
+                sectionCreate.classList.remove("none");
+                break;
+        };
+    });
+}
+
+function clearClasses(){
+    sectionCreate.classList.add("none");
+    sectionLists.classList.add("none");
+}
