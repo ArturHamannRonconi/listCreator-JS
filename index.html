@@ -4,16 +4,70 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css" >
-        <title>Aula</title>
+        <title>ListCreator</title>
     </head>
     <body>
-        <div class="fundo">
-            <h1>Título da lista</h1>
-            <br><br>
-            <input type="text" class="itemList" placeholder="item da lista...">
-            <button class="button">Adicionar ingrediente</button>
-            <ul class="lista"></ul>
+
+            <!-- moldes -->
+        <div class="moldes">
+                <!-- lista -->
+            <div class="list--area">
+                <h2>Título da lista</h2>
+                <ul class="list"></ul>
+            </div>
         </div>
+
+            <!-- header -->
+        <header id="header">
+            <div class="header">
+                <div class="container">
+                    <div class="logo">ListCreator</div>
+                    <div class="menu">
+                        <ul>
+                            <li><a>Criar lista</a></li>
+                            <li><a>Editar lista</a></li>
+                            <li><a>Excluir lista</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+            <!-- section lists -->
+        <section id="section--1">
+            <div class="section--1">
+                <div class="container">
+                    <h1>Não existem listas, <a>criar lista</a></h1>
+                </div>
+            </div>
+        </section>
+
+            <!-- section create Lists  -->
+        <section id="section--2">
+            <div class="section--2">
+                <div class="container">
+                    <div class="list-create-area">
+                        <label>
+                            titulo da lista<br>
+                            <input type="text" placeholder="Dê um título para sua lista...">
+                        </label>
+                        <label>
+                            itens da sua lista<br>
+                            <input type="text" placeholder="Separe os itens da sua lista por ','">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+            <!-- footer -->
+        <footer id="footer">
+            <div class="footer">
+                <div class="container">
+
+                </div>
+            </div>
+        </footer>
 
         <script src="js/script.js"></script>
     </body>
