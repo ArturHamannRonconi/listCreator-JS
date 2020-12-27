@@ -10,31 +10,48 @@ const buttonCreate = document.querySelector("#section--2 .button");
 let listsJson = [];
 let listCreator = {
     creat:() => {
-        const inputTitle = document.querySelector("#section--2 input").value;
-        const textAreaItens = document.querySelector("#section--2 textarea").value;
-
-        if(inputTitle != "" && textAreaItens != ""){
-            const title = inputTitle;
-            const listItens = textAreaItens.split(",");
+        const inputs = document.querySelectorAll("input");
+        const checkInput = listCreator.checkInputs(inputs);
+        
+        if(checkInput === true){
+            const title = inputs[0].value;
+            const listItens = inputs[1].value.split(",");
 
             listsJson.push({title, listItens});
-            listCreator.clearIputs();
+            listCreator.clearIputs(inputs);
+
+
             console.log(listsJson);
         }
         else{
-            console.log("não funcionou")
+            // let errorMensage = "Os dois campos precisam ser preenchidos com um título e pelo menos 1 item";
+            // listCreator.showError(input, errorMensage);
+            console.log(checkInput)
         }
-    },
-    clearIputs:() => {
-        let inputs = document.querySelectorAll("input");
-        let textareas = document.querySelectorAll("textarea");
 
+    },
+    clearIputs:(inputs) => {
         for(let input of inputs){
             input.value = ""
         };
-        for(let textarea of textareas){
-            textarea.value = ""
-        };
+    },
+    checkInputs:(inputs) => {
+        for(let input of inputs){
+            switch (input.value) {
+                case "":
+                    return "Esse campo precisa ser preenchido";
+                    break;
+            }
+        }
+        return true;
+    },
+    showError:(input, error) => {
+        const errorElement = document.createElement("div");
+        const label = document.querySelector(".list-create-area");
+        errorElement.classList.add("error");
+        errorElement.innerHTML = error;
+
+        label.insertBefore(errorElement, input.nextElementSibling)
 
     }
 };
@@ -50,18 +67,24 @@ for(let link of links){
 
         switch(link.getAttribute("data-link")){
             case "lists":
-                clearClasses();   
+                clearScreen();   
                 sectionLists.classList.remove("none");
+                link.classList.add("active");
                 break;
             case "create":
-                clearClasses();
+                clearScreen();
                 sectionCreate.classList.remove("none");
+                link.classList.add("active");
                 break;
         };
     });
 }
 
-function clearClasses(){
+function clearScreen(){
     sectionCreate.classList.add("none");
     sectionLists.classList.add("none");
+
+    links.forEach((link) => {
+        link.classList.remove("active");
+    });
 }

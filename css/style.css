@@ -4,16 +4,17 @@
     margin:0;
     padding:0;
     font-family: Arial, Helvetica, sans-serif;
-
-        /* variáveis de tamanhos */
+}
+:root{
+    /* variáveis de tamanhos */
     --header-height:80px;
     --logo-width-height:calc(var(--header-height) * 2 / 3);
     --section-min-height:calc(100vh - (var(--header-height) + var(--footer-height)));
     --list-create-width:800px;
     --footer-height:50px;
     --input-width:600px;
-
-        /* variáveis de cores */
+    
+    /* variáveis de cores */
     --logo-bgcolor:slateblue;
     --section-bgcolor:rgb(32, 34, 37);
     --list-bgcolor:#2F3136;
@@ -37,6 +38,16 @@
 }
 .active{
     background-color:var(--section-bgcolor);
+}
+.error{
+    font-size:11px;
+    padding:4px;
+    background-color:tomato;
+    text-align:center;
+    border-bottom-left-radius:3px;
+    border-bottom-right-radius:3px;
+    color:#FFF;
+    width:300px;
 }
 
     /* header */
@@ -128,7 +139,7 @@
     border-radius:50px;
     background-color:var(--list-bgcolor);
 }
-#section--2 textarea,
+#section--2 .items,
 #section--2 input{
     width:var(--input-width);
     height:30px;
@@ -140,11 +151,7 @@
     border:1px solid #AAA;
     text-align:center;
 }
-#section--2 textarea{
-    width:var(--input-width);
-    height:200px;
-    padding:20px;
-    resize:none;
+#section--2 .items{
     text-align:left;
 }
 #section--2 label{
