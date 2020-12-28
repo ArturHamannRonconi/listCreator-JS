@@ -40,14 +40,18 @@
     background-color:var(--section-bgcolor);
 }
 .error{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-left:-200px;
+    width:200px;
     font-size:11px;
-    padding:4px;
+    padding:3px;
     background-color:tomato;
     text-align:center;
-    border-bottom-left-radius:3px;
-    border-bottom-right-radius:3px;
+    border-top-left-radius:20px;
+    border-bottom-left-radius:20px;
     color:#FFF;
-    width:300px;
 }
 
     /* header */
@@ -165,6 +169,9 @@
     margin-bottom:10px;
     font-size:20px;
     color:var(--white-text-color);
+}
+#section--2 .input--area{
+    display:flex;
 }
 .button{
     display:block;
