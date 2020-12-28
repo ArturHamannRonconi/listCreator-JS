@@ -13,6 +13,7 @@
     --list-create-width:800px;
     --footer-height:50px;
     --input-width:600px;
+    --error-width:200px;
     
     /* variáveis de cores */
     --logo-bgcolor:slateblue;
@@ -32,6 +33,33 @@
     max-width:1080px;
 }
 
+    /* classes moldes */
+.list--area{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background-color:var(--list-bgcolor);
+    width:300px;
+    margin:20px;
+    padding:50px;
+    border-radius:15px;
+    color:var(--white-text-color);
+}
+.list--area ul li{
+    margin:5px;
+}
+h2{
+    font-size:25px;
+    margin-bottom:15px;
+    font-weight: bold;
+    text-decoration:underline;
+    color:var(--white-text-color);
+}
+.moldes{
+    display:none;
+}
+
     /* classes JS */
 .none{
     display:none;
@@ -43,15 +71,21 @@
     display:flex;
     justify-content:center;
     align-items:center;
-    margin-left:-200px;
-    width:200px;
+    width:var(--error-width);
     font-size:11px;
     padding:3px;
     background-color:tomato;
     text-align:center;
-    border-top-left-radius:20px;
-    border-bottom-left-radius:20px;
+    border-top-right-radius:20px;
+    border-bottom-right-radius:20px;
     color:#FFF;
+}
+.inputError{
+    border:1px solid tomato !important;
+    border-top-right-radius:0 !important;
+    border-bottom-right-radius:0 !important;
+    width:calc(var(--input-width) - var(--error-width)) !important;
+    text-align:left !important;
 }
 
     /* header */
@@ -105,8 +139,18 @@
     height:auto;
 }
 #section--1 .container{
+    /* 
+        futuramente pretendo fazer a parte de listas funcionar com css GRID
+        porém quero que fique algo dinâmico, então provavelmente vou usar o javascript para fazer
+        coisas do tipo como por exemplo, quando uma lista tiver mais que o tamanho máximo pré-definido
+        ela vai mesclar com a linha de baixo.
+        porém para fazer isso vou precisar rever conceitos de css grid que ja me esqueci
+        então por enquanto vai ficar no flexbox
+    */
     justify-content:center;
     align-items:flex-start;
+    flex-wrap:wrap;
+    align-content:flex-start;
 }
 #section--1 h1{
     margin-top:100px;
@@ -143,7 +187,6 @@
     border-radius:50px;
     background-color:var(--list-bgcolor);
 }
-#section--2 .items,
 #section--2 input{
     width:var(--input-width);
     height:30px;
@@ -192,36 +235,4 @@
     justify-content:center;
     height:var(--footer-height);
     background-color:var(--list-bgcolor);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-.fundo{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    background-color:#2F3136;
-    width:600px;
-    padding:50px;
-    margin:100px auto;
-    border-radius:15px;
-}
-h2{
-    font-size:25px;
-    font-weight: bold;
-    text-decoration:underline;
-    color:#FFF;
-}
-.moldes{
-    display:none;
 }
