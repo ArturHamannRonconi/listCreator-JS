@@ -26,12 +26,23 @@ let listCreator = {
         if(send){
             const title = inputs[0].value;
             const listItens = inputs[1].value.split(",");
-
+            const listsArea = document.querySelector("#section--1 .container");
+            
             listsJson.push({title, listItens});
             listCreator.clearIputs(inputs);
+            listsArea.innerHTML = "";
+            
+            listsJson.map((list) => {
+                const listClone = document.querySelector(".list--area").cloneNode(true);
 
+                listClone.querySelector("h2").innerHTML = list.title;
+                for(let item of list.listItens){
+                    let listItem = `<li>${item}</li>`;
+                    listClone.querySelector(".list").innerHTML += listItem;
+                }
+                listsArea.insertAdjacentElement("beforeend", listClone);
 
-            console.log(listsJson);
+            });
         }
 
     },
@@ -52,17 +63,15 @@ let listCreator = {
         const errorElement = document.createElement("div");
         errorElement.classList.add("error");
         errorElement.innerHTML = error;
-        input.style.borderColor = "tomato";
-        input.style.borderTopLeftRadius = "0";
-        input.style.borderBottomLeftRadius = "0";
+        input.classList.add("inputError");
 
-        input.parentElement.insertBefore(errorElement, input)
+        input.parentElement.insertBefore(errorElement, input.nextElementSibling);
     },
     clearErrors:(inputs) => {
         let errorElements = document.querySelectorAll(".error");
         
         for(let input of inputs){
-            input.style = "";
+            input.classList.remove("inputError");
         }
         for(let error of errorElements){
             error.remove();
