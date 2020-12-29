@@ -9,18 +9,17 @@ const inputs = document.querySelectorAll("input");
 
 // variáveis
 let listsJson = [];
-let send;
 let listCreator = {
     creat:() => {
+        let send = true;
+
         listCreator.clearErrors(inputs);
+
         for(let input of inputs){
             let checkInput = listCreator.checkInputs(input);
             if(checkInput !== true){
                 send = false;
                 listCreator.showError(input, checkInput);
-            }
-            else{
-                send = true;
             }
         }
         if(send){
@@ -100,7 +99,8 @@ for(let link of links){
             case "create":
                 linkMenu = links[1]
                 clearScreen();
-                listCreator.clearIputs(inputs)
+                listCreator.clearIputs(inputs);
+                listCreator.clearErrors(inputs);
                 sectionCreate.classList.remove("none");
                 linkMenu.classList.add("active");
                 break;
