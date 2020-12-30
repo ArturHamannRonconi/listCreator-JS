@@ -1,7 +1,7 @@
 const sectionLists = document.querySelector("#section--1");
 const sectionCreate = document.querySelector("#section--2");
 const buttonCreate = document.querySelector("#section--2 .button");
-const inputs = document.querySelectorAll("input");
+const inputs = document.querySelectorAll("input:not(.not)");
 
 let listsJson = [];
 let listCreator = {
@@ -26,19 +26,126 @@ let listCreator = {
             listCreator.clearIputs(inputs);
             listsArea.innerHTML = "";
             
-            listsJson.map((list) => {
-                const listClone = document.querySelector(".list--area").cloneNode(true);
-                
-                listClone.querySelector("h2").innerHTML = list.title;
+            listCreator.showList(listsArea);
+        }
+
+    },
+    showList:(listsArea) => {
+        listsJson.map((list) => {
+            const listClone = document.querySelector(".list--area").cloneNode(true);
+            const settings = listClone.querySelector(".edit-icon--area");
+            const tools = listClone.querySelector(".edit-list--area");
+            const back = listClone.querySelector(".back");
+            const edit = listClone.querySelector(".edit");
+            const exclude = listClone.querySelector(".exclude");
+            const inputOfList = listClone.querySelector(".inputOfList");
+
+            function addItem(){
+                listClone.querySelector(".list").innerHTML = "";
                 for(let item of list.listItens){
                     let listItem = `<li>${item}</li>`;
                     listClone.querySelector(".list").innerHTML += listItem;
                 }
-                listsArea.insertAdjacentElement("beforeend", listClone);
+            }
 
+            listClone.querySelector("h2").innerHTML = list.title;
+            addItem();
+
+            settings.addEventListener("click", () => {
+                settings.querySelector(".icons").classList.remove("girando");
+                settings.querySelector(".icons").classList.add("girando");
+                settings.style.width = "0%";
+                setTimeout(() => {
+                    settings.classList.add("none");
+                    tools.classList.remove("none");
+                    setTimeout(() => {
+                        tools.style.width = "120px";
+                    }, 10);
+                }, 500);
             });
-        }
+            
+            back.addEventListener("click", () => {
+                settings.querySelector(".icons").classList.remove("girando");
+                tools.style.width = "0%";
+            
+                if(inputOfList.classList == "inputOfList none"){
+                    setTimeout(() => {
+                        settings.classList.remove("none");
+                        setTimeout(() => {
+                            settings.style = "";
+                            setTimeout(() => {
+                                settings.querySelector(".icons").classList.add("girando");
+                            }, 0);
+                        }, 10)
+                    }, 450);
+                    setTimeout(() => {
+                        tools.classList.add("none");
+                    }, 400);
+                }
+                else{
+                    inputOfList.style.width = "0%";
+                    setTimeout(() => {
+                        inputOfList.classList.add("none");
+                        setTimeout(() => {
+                            tools.style.width = "0%";
+                            setTimeout(() => {
+                                settings.classList.remove("none");
+                                setTimeout(() => {
+                                    settings.style = "";
+                                    setTimeout(() => {
+                                        settings.querySelector(".icons").classList.add("girando");
+                                    }, 0);
+                                }, 10)
+                            }, 450);
+                            setTimeout(() => {
+                                tools.classList.add("none");
+                            }, 400);
+                        }, 10)
+                    }, 10)
+                }
+            });
+            edit.addEventListener("click", () => {
+                if(inputOfList.classList == "inputOfList none"){
+                    tools.style.width = "360px";
+                    setTimeout(() => {
+                        inputOfList.classList.remove("none");
+                        setTimeout(() => {
+                            inputOfList.style.width = "210px";
+                        }, 10)
+                    }, 10)
+                }
+                else{
+                    inputOfList.style.width = "0%";
+                    setTimeout(() => {
+                        inputOfList.classList.add("none");
+                        setTimeout(() => {
+                            tools.style.width = "120px";
+                        }, 10)
+                    }, 10)
+                }
+            
+            });
+            exclude.addEventListener("click", () => {
+                listsJson.splice(listsJson.findIndex(item => (item.title == list.title && item.listItens == list.listItens)? true:false), 1);
+                listClone.style.opacity = "0";
+                setTimeout(() => {
+                    listClone.remove();
+                },  500)
+            });
 
+            inputOfList.querySelector(".not").addEventListener("keydown", (e) => {
+                let inputOfListValue = inputOfList.querySelector(".not");
+                if(e.key === "Enter" && inputOfListValue.value != ""){
+                    list.listItens.push(inputOfListValue.value);
+                    addItem();
+                    inputOfListValue.value = "";
+                }
+            });
+
+
+            listsArea.insertAdjacentElement("beforeend", listClone);
+
+        });
     },
     clearIputs:(inputs) => {
         for(let input of inputs){
@@ -82,43 +189,6 @@ for(let input of inputs){
         }
     });
 }
-
-
-
-const settings = document.querySelector(".edit-icon--area");
-const tools = document.querySelector(".edit-list--area");
-const back = document.querySelector(".back")
-
-settings.addEventListener("click", () => {
-    settings.querySelector(".icons").classList.remove("girando");
-    settings.querySelector(".icons").classList.add("girando");
-    settings.style.width = "0%";
-    setTimeout(() => {
-        settings.classList.add("none");
-        tools.classList.remove("none");
-        setTimeout(() => {
-            tools.style.width = "15%";
-        }, 10);
-    }, 500);
-});
-
-back.addEventListener("click", () => {
-    settings.querySelector(".icons").classList.remove("girando");
-    tools.style.width = "0%";
-    setTimeout(() => {
-        settings.classList.remove("none");
-        setTimeout(() => {
-            settings.style = "";
-            setTimeout(() => {
-                settings.querySelector(".icons").classList.add("girando");
-            }, 0);
-        }, 10)
-    }, 450);
-    setTimeout(() => {
-        tools.classList.add("none");
-    }, 400);
-});
-
 
 
 // dando função aos links
