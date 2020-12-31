@@ -130,7 +130,11 @@ let listCreator = {
                 listClone.style.opacity = "0";
                 setTimeout(() => {
                     listClone.remove();
-                },  500)
+                    if(listsJson.length == 0){
+                        let textCreateList = "<h1>Não existem listas, <a data-link='create' class='link'>criar lista</a></h1>"
+                        listsArea.innerHTML = textCreateList;
+                    }
+                }, 500);
             });
 
             inputOfList.querySelector(".not").addEventListener("keydown", (e) => {
