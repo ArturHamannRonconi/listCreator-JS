@@ -1,4 +1,5 @@
 const sectionLists = document.querySelector("#section--1");
+const listsArea = document.querySelector("#section--1 .container");
 const sectionCreate = document.querySelector("#section--2");
 const buttonCreate = document.querySelector("#section--2 .button");
 const inputs = document.querySelectorAll("input:not(.not)");
@@ -20,17 +21,16 @@ let listCreator = {
         if(send){
             const title = inputs[0].value;
             const listItens = inputs[1].value.split(",");
-            const listsArea = document.querySelector("#section--1 .container");
             
             listsJson.push({title, listItens});
             listCreator.clearIputs(inputs);
             listsArea.innerHTML = "";
             
-            listCreator.showList(listsArea);
+            listCreator.showList();
         }
 
     },
-    showList:(listsArea) => {
+    showList:() => {
         listsJson.map((list) => {
             const listClone = document.querySelector(".list--area").cloneNode(true);
             const settings = listClone.querySelector(".edit-icon--area");
@@ -130,9 +130,12 @@ let listCreator = {
                 listClone.style.opacity = "0";
                 setTimeout(() => {
                     listClone.remove();
-                    if(listsJson.length == 0){
-                        let textCreateList = "<h1>Não existem listas, <a data-link='create' class='link'>criar lista</a></h1>"
-                        listsArea.innerHTML = textCreateList;
+                    if(listsJson == 0){
+                        listsArea.innerHTML = "";
+                        if(listsJson.length === 0){
+                            arraylinks.push(linkClone.querySelector("a.link"));
+                            listsArea.insertAdjacentElement("afterbegin", linkClone);
+                        }
                     }
                 }, 500);
             });
@@ -197,8 +200,10 @@ for(let input of inputs){
 
 // dando função aos links
 const links = document.querySelectorAll(".link");
+const linkClone = document.querySelector(".link--area");
+let arraylinks = [...links];
 
-for(let link of links){
+for(let link of arraylinks){
     link.addEventListener("click", (e) => {
         e.preventDefault();
 
@@ -206,13 +211,13 @@ for(let link of links){
 
         switch(link.getAttribute("data-link")){
             case "lists":
-                linkMenu = links[0]
+                linkMenu = arraylinks[1]
                 clearScreen();   
                 sectionLists.classList.remove("none");
                 linkMenu.classList.add("active");
                 break;
             case "create":
-                linkMenu = links[1]
+                linkMenu = arraylinks[2]
                 clearScreen();
                 listCreator.clearIputs(inputs);
                 listCreator.clearErrors(inputs);
@@ -227,7 +232,13 @@ function clearScreen(){
     sectionCreate.classList.add("none");
     sectionLists.classList.add("none");
 
-    links.forEach((link) => {
+    arraylinks.forEach((link) => {
         link.classList.remove("active");
     });
+}
+
+
+if(listsJson.length === 0){
+    arraylinks.push(linkClone.querySelector("a.link"));
+    listsArea.insertAdjacentElement("afterbegin", linkClone);
 }
